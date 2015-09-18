@@ -77,7 +77,9 @@ $.widget( "ui.areacomplete", $.ui.autocomplete,
         li = $('<li>')
         anchor = $('<a>').appendTo(li)
         if item.image
-            anchor.append("<img src=\"#{item.image}\" />")
+            anchor.append("<img class=\"mentions-img\" src=\"#{item.image}\" />")
+            if item.image_default
+                $(anchor).find('img').attr('onError',"this.onerror=null;this.src=\"#{item.image_default}\"")
         value = item.value.replace(this.searchTerm.substring(), "<strong>$&</strong>")
         anchor.append(value)
         return li.appendTo(ul)
@@ -298,10 +300,8 @@ class MentionsInput extends MentionsBase
             piece = value.substring(cursor, mention.pos)
             hlContent.push(escapeHtml(piece))
             hdContent.push(piece)
-
-            hlContent.push("<strong>#{mention.name}</strong>")
+            hlContent.push("<strong data-mention=#{mention.name}:#{mention.uid}> #{mention.name} </strong>")
             hdContent.push(@_markupMention(mention))
-
             cursor = mention.pos + mention.name.length
 
         piece = value.substring(cursor)
@@ -528,7 +528,7 @@ function diffChars(oldString, newString) {
         basePath = clonePath(removePath);
         pushComponent(basePath.components, undefined, true);
       } else {
-        basePath = addPath;   // No need to clone, we've pulled it from the list
+        basePath = addPath;   // No need to clone, weve pulled it from the list
         basePath.newPos++;
         pushComponent(basePath.components, true, undefined);
       }

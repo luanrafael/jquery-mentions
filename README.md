@@ -72,7 +72,7 @@ For example:
 #### source
   Data source for the autocomplete. See [jQuery Autocomplete API](http://api.jqueryui.com/autocomplete/#option-source) for available values.
   
-  Source data is an array of objects with `uid` and `value` properties: `[{uid: '123', value: 'Alex'}, ...]`. If you want to display an icon in dropdown list, you can add an `image` property to objects in the array.
+  Source data is an array of objects with `uid` and `value` properties: `[{uid: '123', value: 'Alex'}, ...]`. If you want to display an icon in dropdown list, you can add an `image` and `image_default` property to objects in the array, the `image_default` will be displayed on any erro with the `image`.
 
 #### trigger
   Char which trigger autocomplete, default value is '@'
